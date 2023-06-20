@@ -1,0 +1,180 @@
+<app-adminheader></app-adminheader>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <app-adminsidebar></app-adminsidebar>
+    </div>
+     <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Cotisation</h1>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col col-lg-10">
+                                <i class="fas fa-table me-1"></i>
+                                Liste des cotisation
+                            </div>
+                            <div class="col col-lg-2">
+                                <button class="btn btn-primary btn-sm float-right"  (click)="showAddForm()" >
+                                    <i class="fas fa-plus"></i>
+                                  
+                                    
+                                </button>
+                            </div>
+
+
+                            <div class="row" *ngIf="addFormVisible">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        
+                                </div>
+
+                            <div class="card-body">
+                                <form (ngSubmit)="createCotisation()" [formGroup]="cotisationForm">
+                                    <div class="card card-default">
+                                       
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="form-group col-lg-6">
+                                                    <label>mois</label>
+                                                    <input type="date" formControlName="mois" class="form-control" />
+                                                    <div class="error-message" *ngIf="cotisationForm.get('mois')?.invalid && (cotisationForm.get('mois')?.dirty || cotisationForm.get('mois')?.touched)">
+                                                      <div class="error-text" *ngIf="cotisationForm.get('mois')?.errors?.['required']">Nom is required.</div>
+                                                    </div>
+                                                   </div> 
+                                                <div class="form-group col-lg-6">
+                                                    <label>Montant</label>
+                                                    <input type="number" formControlName="montant" class="form-control" />
+                                                    <div class="error-message" *ngIf="cotisationForm.get('montant')?.invalid && (cotisationForm.get('montant')?.dirty || cotisationForm.get('montant')?.touched)">
+                                                      <div class="error-text" *ngIf="cotisationForm.get('montant')?.errors?.['required']">Montant is required.</div>
+                                                    </div>
+   
+                                                </div>
+                                              
+                                         
+                                                <div class="form-group col-lg-6">
+                                                    <label>userId</label>
+                                                    <select class="form-control" formControlName="userId">
+                                                    (change)="getid($event)"  formControlName="type">
+                                                    <option *ngFor="let opt of user"
+                                                        [value]="opt.id">
+                                                        {{ opt.nom }}
+                                                    </option>
+                                                </select>
+                                                 <div  class="error-message" *ngIf="cotisationForm.get('userId')?.invalid && (cotisationForm.get('userId')?.dirty || cotisationForm.get('userId')?.touched)">
+                                                        <div class="error-text" *ngIf="cotisationForm.get('userId')?.errors?.['required']">UserId is required.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="row float-right">
+                                                <div class="col">
+                                                    <button type="reset" class="btn btn-primary btn-sm m-3" (click)="hideAddForm()">Annuler</button>
+                                                    <button type="submit" class="btn btn-success btn-sm">Enregistrer</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>  
+                            <div class="row" *ngIf="editFormVisible">
+                            <div class="card mb-4">
+                                <div class="card-body">
+        
+                                    <form (ngSubmit)="updateCotisation(cotisation)" method="POST">
+                                        <div class="card card-default">
+        
+                                            <div class="card-body">
+        
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-6">
+                                                            <label>mois</label>
+                                                            <input type="date" formControlName="mois" class="form-control" />
+                                                            <div class="error-message" *ngIf="cotisationForm.get('mois')?.invalid && (cotisationForm.get('mois')?.dirty || cotisationForm.get('mois')?.touched)">
+                                                              <div class="error-text" *ngIf="cotisationForm.get('mois')?.errors?.['required']">Nom is required.</div>
+                                                            </div>
+                                                           </div> 
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Montant</label>
+                                                            <input type="number" formControlName="montant" class="form-control" />
+                                                            <div class="error-message" *ngIf="cotisationForm.get('montant')?.invalid && (cotisationForm.get('montant')?.dirty || cotisationForm.get('montant')?.touched)">
+                                                              <div class="error-text" *ngIf="cotisationForm.get('montant')?.errors?.['required']">Montant is required.</div>
+                                                            </div>
+           
+                                                        </div>
+                                                     </div>
+                                                     </div>
+                                            <div class="card-footer">
+                                                <div class="row float-right">
+                                                    <div class="col">
+                                                        <button type="reset" class="btn btn-primary  btn-sm m-3"
+                                                            data-dismiss="modal"
+                                                            (click)="hideEditForm()">Annuler</button>
+                                                        <button type="submit" class="btn btn-success btn-sm"
+                                                            data-dismiss="modal">Enregistrer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+        
+        
+        
+        
+                                </div>
+                            </div>
+                        </div>
+        
+
+
+
+
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>UserId</th>
+<th>Montant</th>
+<th>Mois</th>
+
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let cotisation of Cotisation | slice:(currentPage - 1) * itemsPerPage : currentPage * itemsPerPage ">
+<!--<td> <p>{{cotisation.id}}</p></td>-->
+<td> <p>{{cotisation.montant}}</p></td>
+<td> <p>{{cotisation.mois}}</p></td>
+<td> <p>{{cotisation.userId}}</p></td>
+<td> <p>{{cotisation.createdAt| date : "MM/dd/yyyy hh:mm:ssa" }}</p></td>
+<td> <p> {{cotisation.updatedAt | date : "MM/dd/yyyy hh:mm:ssa" }}</p></td>
+
+<td><button class="btn btn-sm btn-warning m-2"  (click)="editCotisation(cotisation)">
+<i class="fas fa-pen text-white"></i>
+
+</button>
+
+<button class="btn btn-sm btn-danger m-2" (click)="deleteCotisation(cotisation)">
+<i class="fas fa-trash text-white"></i>
+
+</button>
+</td>
+
+</tbody>
+</table>
+<div><button  *ngIf="currentPage>1" class="previous-button" (click)="currentPage = currentPage - 1">Précédent</button>
+    <button *ngIf="currentPage<total"  class="next-button" (click)="currentPage = currentPage + 1">Suivant</button></div>
+
+                </div>
+            </div>
+        </main>
+        
+    </div>
+</div>

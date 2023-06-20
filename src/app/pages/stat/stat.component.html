@@ -1,0 +1,155 @@
+<app-adminheader></app-adminheader>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <app-adminsidebar></app-adminsidebar>
+    </div>
+
+<div class="container-fluid page-body-wrapper">
+  <div class="bg-default" >
+    <div class="main-content">
+      <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+          <h2 class="mb-5 text-white">Stats </h2>
+          <div class="header-body">
+            <div class="row">
+              <div class="col-xl-3 col-lg-6">
+                <div class="card card-stats mb-4 mb-xl-0">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Users</h5>
+                        <span class="h2 font-weight-bold mb-0">{{totaluser}}</span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                          <i class="fas fa-chart-bar"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> {{totallastMonth}}%</span>
+                      <span class="text-nowrap">Depuis le mois dernier </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-6">
+                <div class="card card-stats mb-4 mb-xl-0">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Agances</h5>
+                        <span class="h2 font-weight-bold mb-0">{{totalagence}}</span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                          <i class="fas fa-chart-pie"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>{{totalaglastMonth.toFixed(2)}}%</span>
+                      <span class="text-nowrap">Depuis la semaine dernière </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-6">
+                <div class="card card-stats mb-4 mb-xl-0">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Bus</h5>
+                        <span class="h2 font-weight-bold mb-0">{{totalbus}}</span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                          <i class="fas fa-users"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>{{agencename}}</span>
+                      <span class="text-nowrap">{{highestVehicleCount}} Vehicules</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-6">
+                <div class="card card-stats mb-4 mb-xl-0">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Facturation</h5>
+                        <span class="h2 font-weight-bold mb-0">{{result.agencyName}}</span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                          <i class="fas fa-percent"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> {{result.totalBillingAmount}} D</span>
+                      <span class="text-nowrap">Depuis le mois dernier</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page content -->
+    </div>
+
+  </div>
+ <!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row" style="display: flex;">
+      <div class="chart-container" style="width: 50%; height: 50%;">
+        <h2 style=" text-align: center;">Utilisateurs Par Planification</h2>
+        <canvas baseChart  
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [type]="barChartType1"
+        ></canvas>
+      </div>
+      <div class="chart-container" style="width: 50%; height: 50%;">
+        <h2 style=" text-align: center;">Planifications Par Agence</h2>
+        <canvas baseChart width="600" height="200" 
+          [datasets]="fbarChartData"
+          [labels]="fbarChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [type]="barChartType2"
+        ></canvas>
+      </div>
+      <div class="chart-container" >
+        <h2 style=" text-align: center;">Vehicules Par Agence</h2>
+        <canvas baseChart width="600" height="200" 
+          [datasets]="vbarChartData"
+          [labels]="vbarChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [type]="barChartType3"
+        ></canvas>
+      </div>
+      <div class="chart-container" >
+        <h2 style=" text-align: center;">Facturation Par Agence</h2>
+        <canvas baseChart width="600" height="200" 
+          [datasets]="pbarChartData"
+          [labels]="pbarChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [type]="barChartType3"
+        ></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+  

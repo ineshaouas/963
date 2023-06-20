@@ -1,0 +1,92 @@
+select {
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;
+    outline:0;
+    box-shadow:none;
+
+    background-image: none;
+    flex: 1;
+    padding: 0 .5em;
+    
+    cursor:pointer;
+    font-size: 1em;
+    font-family: 'Open Sans', sans-serif;
+ }
+ select::-ms-expand {
+    display: none;
+ }
+ .select {
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    line-height: 3;
+    background: #5c6664;
+    overflow: hidden;
+    border-radius: .25em;
+ }
+ .select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: #2b2e2e;
+    cursor:pointer;
+    pointer-events:none;
+    transition:.25s all ease;
+ }
+ 
+ .previous-button {
+   background-color: #86abf0; /* couleur de fond */
+   border: none; /* pas de bordure */
+   color: white; /* couleur de texte */
+   padding: 10px 20px; /* espacement autour du texte */
+   text-align: center; /* centré horizontalement */
+   text-decoration: none; /* pas de soulignement */
+   display: inline-block; /* affichage en ligne */
+   font-size: 16px; /* taille de police */
+   margin: 10px; /* espacement autour du bouton */
+   border-radius: 5px; /* bordure arrondie */
+   cursor: pointer; /* curseur de souris */
+ }
+ .previous-button:hover{
+  color:  rgb(166, 199, 241);
+  background-color: #3213df;
+  cursor: pointer;
+}
+ 
+ .next-button {
+   background-color: #316291; /* couleur de fond */
+   border: none; /* pas de bordure */
+   color: white; /* couleur de texte */
+   padding: 10px 20px; /* espacement autour du texte */
+   text-align: center; /* centré horizontalement */
+   text-decoration: none; /* pas de soulignement */
+   display: inline-block; /* affichage en ligne */
+   font-size: 16px; /* taille de police */
+   margin: 10px; /* espacement autour du bouton */
+   border-radius: 5px; /* bordure arrondie */
+   cursor: pointer; /* curseur de souris */
+   float: right; /* flotter à droite */
+ }
+ .next-button:hover{
+  color:  rgb(166, 199, 241);
+  background-color: #3213df;
+  cursor: pointer;
+}
+ .search {
+  /*background-color: rgb(139, 170, 216);*/
+  color: #333; /* couleur du texte */
+  font-size: 16px; /* taille de police */
+  padding: 10px 20px; /* espace autour du texte */
+  border: none; /* bordure */
+  border-radius: 4px; /* coins arrondis */
+  cursor: pointer; /* curseur de la souris */
+  transition: background-color 0.3s ease; /* transition de la couleur de fond */
+  margin-bottom: 10px;
+  float: right;
+}
+ 

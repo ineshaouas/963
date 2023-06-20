@@ -1,0 +1,113 @@
+<app-adminheader></app-adminheader>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+       <app-adminsidebar></app-adminsidebar>
+    </div>
+    
+    <div class="container">
+        <h1 class="mt-4" *ngIf="check==false"> Profile</h1>
+        <h1 class="mt-4" *ngIf="check==true">  Edit profile</h1>
+    <div class="row flex-lg-nowrap">
+      
+    
+      <div class="col">
+        <div class="row">
+          <div class="col mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="e-profile">
+                  <div class="row">
+                    <div class="col-12 col-sm-auto mb-3">
+                      <div class="mx-auto" style="width: 140px;">
+                        <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                          <img src="assets/user.jpeg" style="width: 150px; height: 150px;" >                      </div>
+                      </div>
+                    </div>
+                  
+                    <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                      <div class="text-center text-sm-left mb-2 mb-sm-0">
+                        <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{user.email }}</h4>
+                        <p class="mb-0">{{user.matricule}}</p>
+                        <p class="mb-0">{{user.role?.roleName}}</p>
+                       
+                        
+                      </div>
+                    </div>
+
+                  </div>
+                  <div *ngIf="check==false">
+                  <button type="submit" class="btn btn-primary" (click)="show()">Edit</button>
+                </div>
+                  <div class="tab-content pt-3"  *ngIf="check" >
+                    <div class="tab-pane active">
+                      <form class="form" novalidate="">
+                        <div class="row">
+                          <div class="col">
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Full Name</label>
+                                  <input class="form-control" type="text" name="nom"  [(ngModel)]="user.nom">
+                                </div>
+                                
+                              </div>
+                             
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Email</label>
+                                  <input class="form-control" type="text" name="email" [(ngModel)]="user.email">
+                                </div>
+                              </div>
+                            </div>
+                            
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-sm-6 mb-3">
+                            <div class="mb-2"><b>Change Password</b></div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Current Password</label>
+                                  <input class="form-control" name ="cpassword" type="password" placeholder="••••••"    [(ngModel)]="cpassword" >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>New Password</label>
+                                  <input class="form-control" type="password" name ="password" placeholder="••••••" [(ngModel)]="npassword">
+                                </div>
+                              </div>
+                            </div>
+                           
+                          </div>
+                        
+                        </div>
+                        
+                        <div class="col d-flex  justify-content-end " >
+                          <button type="reset"
+                              class="btn btn-primary  btn-sm m-3"
+                              data-dismiss="modal" (click)="hide()">Cancel</button>
+                          <button type="submit" class="btn btn-success  btn-sm m-3"
+                              data-dismiss="modal" (click)="edit() "  >Save</button>
+                      </div>
+                      </form>
+    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          
+        </div>
+    
+      </div>
+    </div>
+    </div>
+  

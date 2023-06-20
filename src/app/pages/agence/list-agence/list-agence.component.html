@@ -1,0 +1,247 @@
+<app-adminheader></app-adminheader>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <app-adminsidebar></app-adminsidebar>
+    </div>
+     <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Agences</h1>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col col-lg-10">
+                                <i class="fas fa-table me-1"></i>
+                                Liste des agences
+                            </div>
+                            <div class="col col-lg-2">
+                                <button class="btn btn-primary btn-sm float-right"  (click)="showAddForm()" >
+                                    <i class="fas fa-plus"></i>
+                                    
+                                </button>
+                            </div>
+
+
+                            <div class="row" *ngIf="addFormVisible">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        
+                                    </div>
+                                    <div class="card-body">
+            
+                                        <form (ngSubmit)="createagence()" [formGroup]="agenceFrom">
+                                            <div class="card card-default">
+                                
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Matricule</label>
+                                                            <input type="text" [maxlength]="10" [minlength]="10" formControlName="matricule" class="form-control" />
+                                                            <div class="error-message" *ngIf="agenceFrom.get('matricule')?.invalid && (agenceFrom.get('matricule')?.dirty || agenceFrom.get('matricule')?.touched)">
+                                                              <div class="error-text" *ngIf="agenceFrom.get('matricule')?.errors?.['required']">Matricule is required.</div>
+                                                              <div class="error-text" *ngIf="agenceFrom.get('matricule')?.errors?.['minlength']">Matricule should have a minimum length of 10 characters.</div>
+                                                              <div class="error-text" *ngIf="agenceFrom.get('matricule')?.errors?.['maxlength']">Matricule should have a maximum length of 10 characters.</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Nom</label>
+                                                            <input type="text" formControlName="name"  class="form-control" />
+                                                            <div  class="error-message" *ngIf="agenceFrom.get('name')?.invalid && (agenceFrom.get('name')?.dirty || agenceFrom.get('name')?.touched)">
+                                                                <div class="error-text"  *ngIf="agenceFrom.get('name')?.errors?.['required']">Name is required.</div>
+                                                              </div>  
+                                                               
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Adresse</label>
+                                                            <input type="text" formControlName="adress" class="form-control" />
+                                                            <div  class="error-message" *ngIf="agenceFrom.get('adress')?.invalid && (agenceFrom.get('adress')?.dirty || agenceFrom.get('adress')?.touched)">
+                                                              <div class="error-text"  *ngIf="agenceFrom.get('adress')?.errors?.['required']">Adresse is required.</div>
+                                                            </div>
+                                                          
+                                                        </div>
+
+
+
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Email</label>
+                                                            <input type="email" formControlName="email" class="form-control" />
+                                                    <div class="error-message" *ngIf="agenceFrom.get('raisonSocial')?.invalid && (agenceFrom.get('email')?.dirty || agenceFrom.get('email')?.touched)">
+                                                      <div class="error-text" *ngIf="agenceFrom.get('email')?.errors?.['required']">Email is required.</div>
+                                                      <div class="error-text" *ngIf="agenceFrom.get('email')?.errors?.['email']">Invalid email format.</div>
+                                                    </div>
+                                                  
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>RaisonSocial</label>
+                                                                <input type="text"name="raisonSocial"    class="form-control">
+                                                                <div  class="error-message" *ngIf="agenceFrom.get('raisonSocial')?.invalid && (agenceFrom.get('raisonSocial')?.dirty || agenceFrom.get('raisonSocial')?.touched)">
+                                                                    <div class="error-text"  *ngIf="agenceFrom.get('raisonSocial')?.errors?.['required']">RaisonSocial is required.</div>
+                                                                  </div>
+                                                        </div>
+                                                  </div>
+                                                     
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="row float-right">
+                                                       
+                                                            <div class="col">
+                                                                <button type="reset" class="btn btn-primary btn-sm m-3" data-dismiss="modal" (click)="hideAddForm()">Annuler</button>
+                                                                <button type="submit" class="btn btn-success btn-sm" data-dismiss="modal" [disabled]="agenceFrom.invalid">Enregistrer</button>
+                                                              </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+            
+            
+            
+            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="editFormVisible">
+                            <div class="card mb-4">
+                                <div class="card-body">
+        
+                                    <form  [formGroup]="agenceFrom" (ngSubmit)="updateagence(agence)" >
+                                        <div class="card card-default">
+        
+                                            <div class="card-body">
+        
+                                                <div class="row">
+                                                    <div class="form-group col-lg-6">
+                                                            <label>Matricule</label>
+                                                            <input type="text" [maxlength]="10" [minlength]="10" formControlName="matricule" class="form-control" />
+                                                            <div class="error-message" *ngIf="agenceFrom.get('matricule')?.invalid && (agenceFrom.get('matricule')?.dirty || agenceFrom.get('matricule')?.touched)">
+                                                              <div class="error-text" *ngIf="agenceFrom.get('matricule')?.errors?.['required']">Matricule is required.</div>
+                                                              <div class="error-text" *ngIf="agenceFrom.get('matricule')?.errors?.['minlength']">Matricule should have a minimum length of 10 characters.</div>
+                                                              <div class="error-text" *ngIf="agenceFrom.get('matricule')?.errors?.['maxlength']">Matricule should have a maximum length of 10 characters.</div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                        <label>Nom</label>
+                                                        <input type="text" formControlName="name" class="form-control" />
+                                                        <div class="error-message" *ngIf="agenceFrom.get('name')?.invalid && (agenceFrom.get('name')?.dirty || agenceFrom.get('name')?.touched)">
+                                                          <div class="error-text" *ngIf="agenceFrom.get('name')?.errors?.['required']">Nom is required.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                        <label>Adresse</label>
+                                                        <textarea name="description" [(ngModel)]="agence.address" required
+                                                            class="form-control">
+                                                            </textarea>
+                                                    </div>
+
+
+
+                                                    <div class="form-group col-lg-6">
+                                                        <label>Email</label>
+                                                        <input type="email" formControlName="email" class="form-control" />
+                                                        <div class="error-message" *ngIf="agenceFrom.get('email')?.invalid && (agenceFrom.get('email')?.dirty || agenceFrom.get('email')?.touched)">
+                                                          <div class="error-text" *ngIf="agenceFrom.get('email')?.errors?.['required']">Email is required.</div>
+                                                          <div class="error-text" *ngIf="agenceFrom.get('email')?.errors?.['email']">Invalid email format.</div>
+                                                        </div>
+                                                            <input type="email"name="email" [(ngModel)]="agence.email"  required
+                                                            class="form-control" />
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                        <label>RaisonSocial</label>
+                                                            <input type="text"name="raisonSocial"    class="form-control">
+                                                            <div  class="error-message" *ngIf="agenceFrom.get('raisonSocial')?.invalid && (agenceFrom.get('raisonSocial')?.dirty || agenceFrom.get('raisonSocial')?.touched)">
+                                                                <div class="error-text"  *ngIf="agenceFrom.get('raisonSocial')?.errors?.['required']">RaisonSocial is required.</div>
+                                                              </div>
+                                                    </div>
+                                                </div>
+                                                 
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="row float-right">
+                                                    <div class="col">
+                                                        <button type="reset" class="btn btn-primary btn-sm m-3" data-dismiss="modal" (click)="hideAddForm()">Annuler</button>
+                                                        <button type="submit" class="btn btn-success btn-sm" data-dismiss="modal" [disabled]="agenceFrom.invalid">Enregistrer</button>
+                                                      </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+        
+        
+        
+        
+                                </div>
+                            </div>
+                        </div>
+        
+
+
+
+
+                        </div>
+                    </div>
+
+                    <div style="margin: 2%; display: flex; align-items: center;">
+                        <h6 style="margin-right: 10px;">Agence:</h6>
+                        <div>
+                            <select (change)="ChangeSortOrderbystate($event)">
+                                <option value="all">
+                                    All
+                                </option>
+                                <option *ngFor="let sortOrder of agences" [value]="sortOrder.id">
+                                    {{sortOrder.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                      </div>
+
+
+                    <table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Matricule</th>
+<th>Nom</th>
+<th>Email</th>
+<th>RaisonSocial</th>
+<th>Address</th>
+<th>CreatedAt</th>
+<th>UpdatedAt</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody> 
+<tr *ngFor="let agence of agences; ">
+    <td> <p>{{agence.matricule}}</p></td>
+<td> <p>{{agence.name}}</p></td>
+<td> <p>{{agence.email}}</p></td> 
+<td> <p>{{agence.raisonSocial}}</p></td> 
+<td> <p>{{agence.address}}</p></td> 
+<td> <p>{{agence.createdAt| date : "MM/dd/yyyy hh:mm:ssa" }}</p></td>
+<td> <p> {{ agence.updatedAt | date : "MM/dd/yyyy hh:mm:ssa" }}</p></td>
+<td>
+    
+    <button class="btn btn-sm btn-warning m-2"  (click)="editagence(agence)">
+        <i class="fas fa-pen text-white"></i>
+      
+        
+</button>
+
+<button class="btn btn-sm btn-danger m-2" (click)="deleteagence(agence)">
+    <i class="fas fa-trash text-white"></i>
+</button>
+</td>
+
+</tbody>
+</table>
+<div><button *ngIf="currentPage >1" class="previous-button"
+    (click)="currentPage = currentPage - 1">Précédent</button>
+<button *ngIf="currentPage < total" class="next-button"
+    (click)="currentPage = currentPage + 1">Suivant</button>
+</div>
+
+                </div>
+            </div>
+        </main>
+        
+    </div>
+</div>

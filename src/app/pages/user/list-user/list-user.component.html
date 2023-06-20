@@ -1,0 +1,361 @@
+<app-adminheader></app-adminheader>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <app-adminsidebar></app-adminsidebar>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Utilisateurs</h1>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col col-lg-10">
+                                <i class="fas fa-table me-1"></i>
+                                Liste d'utilisateurs
+                            </div>
+
+                            <div class="col col-lg-2">
+                                <button class="btn btn-primary btn-sm float-right" (click)="showAddForm()">
+                                    <i class="fas fa-plus"></i>
+                                    
+                                </button>
+                            </div>
+
+
+                            <div class="row" *ngIf="addFormVisible">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+
+                                    </div>
+                                    <div class="card-body">
+
+                                       
+                                        <form (ngSubmit)="createuser()" [formGroup]="userForm">
+                                            <div class="card card-default">
+                                              <div class="card-body">
+                                                <div class="form-group col-lg-6">
+                                                  <label>Matricule</label>
+                                                  <input type="text" [maxlength]="10" [minlength]="10" formControlName="matricule" class="form-control" />
+                                                  <div class="error-message" *ngIf="userForm.get('matricule')?.invalid && (userForm.get('matricule')?.dirty || userForm.get('matricule')?.touched)">
+                                                    <div class="error-text" *ngIf="userForm.get('matricule')?.errors?.['required']">Matricule is required.</div>
+                                                    <div class="error-text" *ngIf="userForm.get('matricule')?.errors?.['minlength']">Matricule should have a minimum length of 10 characters.</div>
+                                                    <div class="error-text" *ngIf="userForm.get('matricule')?.errors?.['maxlength']">Matricule should have a maximum length of 10 characters.</div>
+                                                  </div>
+                                                </div>
+                                                <div class="form-group col-lg-6">
+                                                  <label>Nom</label>
+                                                  <input type="text" formControlName="nom" class="form-control" />
+                                                  <div class="error-message" *ngIf="userForm.get('nom')?.invalid && (userForm.get('nom')?.dirty || userForm.get('nom')?.touched)">
+                                                    <div class="error-text" *ngIf="userForm.get('nom')?.errors?.['required']">Nom is required.</div>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="form-group col-lg-6">
+                                                    <label>Email</label>
+                                                    <input type="email" formControlName="email" class="form-control" />
+                                                    <div class="error-message" *ngIf="userForm.get('email')?.invalid && (userForm.get('email')?.dirty || userForm.get('email')?.touched)">
+                                                      <div class="error-text" *ngIf="userForm.get('email')?.errors?.['required']">Email is required.</div>
+                                                      <div class="error-text" *ngIf="userForm.get('email')?.errors?.['email']">Invalid email format.</div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group col-lg-6">
+                                                    <label>Password</label>
+                                                    <input type="password" [minlength]="8"  formControlName="password" class="form-control" />
+                                                    <div class="error-message" *ngIf="userForm.get('password')?.invalid && (userForm.get('password')?.dirty || userForm.get('password')?.touched)">
+                                                      <div class="error-text" *ngIf="userForm.get('password')?.errors?.['required']">Password is required.</div>
+                                                      <div class="error-text" *ngIf="userForm.get('password')?.errors?.['minlength']">Password should have a minimum length of 8 characters.</div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group col-lg-6">
+                                                    <label>Adresse</label>
+                                                    <input type="text" formControlName="adresse" class="form-control" />
+                                                    <div  class="error-message" *ngIf="userForm.get('adresse')?.invalid && (userForm.get('adresse')?.dirty || userForm.get('adresse')?.touched)">
+                                                      <div class="error-text"  *ngIf="userForm.get('adresse')?.errors?.['required']">Adresse is required.</div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group col-lg-6">
+                                                    <label>Plansection</label>
+                                                    <input type="text" formControlName="plansection" class="form-control" />
+                                                    <div class="error-message" *ngIf="userForm.get('plansection')?.invalid && (userForm.get('plansection')?.dirty || userForm.get('plansection')?.touched)">
+                                                      <div class="error-text"  *ngIf="userForm.get('plansection')?.errors?.['required']">Plansection is required.</div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group col-lg-6">
+                                                    <label>Segment</label>
+                                                    <input type="text" formControlName="segment" class="form-control" />
+                                                    <div  class="error-message" *ngIf="userForm.get('segment')?.invalid && (userForm.get('segment')?.dirty || userForm.get('segment')?.touched)">
+                                                      <div class="error-text"  *ngIf="userForm.get('segment')?.errors?.['required']">Segment is required.</div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group col-lg-6">
+                                                    <label>Role</label>
+                                                    <select class="form-control" formControlName="roleId">
+                                                      <option *ngFor="let opt of roles" [value]="opt.id">{{ opt.roleName }}</option>
+                                                    </select>
+                                                    <div class="error-message" *ngIf="userForm.get('roleId')?.invalid && (userForm.get('roleId')?.dirty || userForm.get('roleId')?.touched)">
+                                                      <div class="error-text" *ngIf="userForm.get('roleId')?.errors?.['required']">Role is required.</div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group col-lg-6">
+                                                    <label>Permission</label>
+                                                    <select class="form-control" formControlName="permissionId">
+                                                      <option *ngFor="let opt of permissions" [value]="opt.id">{{ opt.description }}</option>
+                                                    </select>
+                                                    <div  class="error-message" *ngIf="userForm.get('permissionId')?.invalid && (userForm.get('permissionId')?.dirty || userForm.get('permissionId')?.touched)">
+                                                      <div class="error-text" *ngIf="userForm.get('permissionId')?.errors?.['required']">Permission is required.</div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group col-lg-6">
+                                                    <label>Planifications</label>
+                                                    <select class="form-control" formControlName="listePlanificationId">
+                                                      <option *ngFor="let opt of plani" [value]="opt.id">{{ opt.planificationName }}</option>
+                                                    </select>
+                                                    <div class="error-message" *ngIf="userForm.get('listePlanificationId')?.invalid && (userForm.get('listePlanificationId')?.dirty || userForm.get('listePlanificationId')?.touched)">
+                                                      <div class="error-text" *ngIf="userForm.get('listePlanificationId')?.errors?.['required']">Planification is required.</div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group col-lg-6">
+                                                    <label>Shift</label>
+                                                    <select class="form-control" formControlName="shiftId">
+                                                      <option *ngFor="let opt of Shift" [value]="opt.id">{{ opt.entre | date : 'hh:mm'}} | {{opt.sortie | date : 'hh:mm'}}</option>
+                                                    </select>
+                                                    <div class="error-message" *ngIf="userForm.get('shiftId')?.invalid && (userForm.get('shiftId')?.dirty || userForm.get('shiftId')?.touched)">
+                                                      <div class="error-text"  *ngIf="userForm.get('shiftId')?.errors?.['required']">Shift is required.</div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="card-footer">
+                                                <div class="row float-right">
+                                                  <div class="col">
+                                                    <button type="reset" class="btn btn-primary btn-sm m-3" data-dismiss="modal" (click)="hideAddForm()">Annuler</button>
+                                                    <button type="submit" class="btn btn-success btn-sm" data-dismiss="modal" [disabled]="userForm.invalid">Enregistrer</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </form>
+                                          
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="editFormVisible">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+
+                                        <form  [formGroup]="userForm" (ngSubmit)="updateuser(user)" >
+                                            <div class="card card-default">
+                                                <div class="card-body">
+                                                  <div class="form-group col-lg-6">
+                                                    <label>Matricule</label>
+                                                    <input type="text" [maxlength]="10" [minlength]="10" formControlName="matricule" class="form-control" />
+                                                    <div class="error-message" *ngIf="userForm.get('matricule')?.invalid && (userForm.get('matricule')?.dirty || userForm.get('matricule')?.touched)">
+                                                      <div class="error-text" *ngIf="userForm.get('matricule')?.errors?.['required']">Matricule is required.</div>
+                                                      <div class="error-text" *ngIf="userForm.get('matricule')?.errors?.['minlength']">Matricule should have a minimum length of 10 characters.</div>
+                                                      <div class="error-text" *ngIf="userForm.get('matricule')?.errors?.['maxlength']">Matricule should have a maximum length of 10 characters.</div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group col-lg-6">
+                                                    <label>Nom</label>
+                                                    <input type="text" formControlName="nom" class="form-control" />
+                                                    <div class="error-message" *ngIf="userForm.get('nom')?.invalid && (userForm.get('nom')?.dirty || userForm.get('nom')?.touched)">
+                                                      <div class="error-text" *ngIf="userForm.get('nom')?.errors?.['required']">Nom is required.</div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="row">
+                                                    <div class="form-group col-lg-6">
+                                                      <label>Email</label>
+                                                      <input type="email" formControlName="email" class="form-control" />
+                                                      <div class="error-message" *ngIf="userForm.get('email')?.invalid && (userForm.get('email')?.dirty || userForm.get('email')?.touched)">
+                                                        <div class="error-text" *ngIf="userForm.get('email')?.errors?.['required']">Email is required.</div>
+                                                        <div class="error-text" *ngIf="userForm.get('email')?.errors?.['email']">Invalid email format.</div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                      <label>Password</label>
+                                                      <input type="password" [minlength]="8"  formControlName="password" class="form-control" />
+                                                      <div class="error-message" *ngIf="userForm.get('password')?.invalid && (userForm.get('password')?.dirty || userForm.get('password')?.touched)">
+                                                        <div class="error-text" *ngIf="userForm.get('password')?.errors?.['required']">Password is required.</div>
+                                                        <div class="error-text" *ngIf="userForm.get('password')?.errors?.['minlength']">Password should have a minimum length of 8 characters.</div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                      <label>Adresse</label>
+                                                      <input type="text" formControlName="adresse" class="form-control" />
+                                                      <div  class="error-message" *ngIf="userForm.get('adresse')?.invalid && (userForm.get('adresse')?.dirty || userForm.get('adresse')?.touched)">
+                                                        <div class="error-text"  *ngIf="userForm.get('adresse')?.errors?.['required']">Adresse is required.</div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                      <label>Plansection</label>
+                                                      <input type="text" formControlName="plansection" class="form-control" />
+                                                      <div class="error-message" *ngIf="userForm.get('plansection')?.invalid && (userForm.get('plansection')?.dirty || userForm.get('plansection')?.touched)">
+                                                        <div class="error-text"  *ngIf="userForm.get('plansection')?.errors?.['required']">Plansection is required.</div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                      <label>Segment</label>
+                                                      <input type="text" formControlName="segment" class="form-control" />
+                                                      <div  class="error-message" *ngIf="userForm.get('segment')?.invalid && (userForm.get('segment')?.dirty || userForm.get('segment')?.touched)">
+                                                        <div class="error-text"  *ngIf="userForm.get('segment')?.errors?.['required']">Segment is required.</div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                      <label>Role</label>
+                                                      <select class="form-control" formControlName="roleId">
+                                                        <option *ngFor="let opt of roles" [value]="opt.id">{{ opt.roleName }}</option>
+                                                      </select>
+                                                      <div class="error-message" *ngIf="userForm.get('roleId')?.invalid && (userForm.get('roleId')?.dirty || userForm.get('roleId')?.touched)">
+                                                        <div class="error-text" *ngIf="userForm.get('roleId')?.errors?.['required']">Role is required.</div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                      <label>Permission</label>
+                                                      <select class="form-control" formControlName="permissionId">
+                                                        <option *ngFor="let opt of permissions" [value]="opt.id">{{ opt.description }}</option>
+                                                      </select>
+                                                      <div  class="error-message" *ngIf="userForm.get('permissionId')?.invalid && (userForm.get('permissionId')?.dirty || userForm.get('permissionId')?.touched)">
+                                                        <div class="error-text" *ngIf="userForm.get('permissionId')?.errors?.['required']">Permission is required.</div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                      <label>Planifications</label>
+                                                      <select class="form-control" formControlName="listePlanificationId">
+                                                        <option *ngFor="let opt of plani" [value]="opt.id">{{ opt.planificationName }}</option>
+                                                      </select>
+                                                      <div class="error-message" *ngIf="userForm.get('listePlanificationId')?.invalid && (userForm.get('listePlanificationId')?.dirty || userForm.get('listePlanificationId')?.touched)">
+                                                        <div class="error-text" *ngIf="userForm.get('listePlanificationId')?.errors?.['required']">Planification is required.</div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                      <label>Shift</label>
+                                                      <select class="form-control" formControlName="shiftId">
+                                                        <option *ngFor="let opt of Shift" [value]="opt.id">{{ opt.entre | date : 'hh:mm'}} | {{opt.sortie | date : 'hh:mm'}}</option>
+                                                      </select>
+                                                      <div class="error-message" *ngIf="userForm.get('shiftId')?.invalid && (userForm.get('shiftId')?.dirty || userForm.get('shiftId')?.touched)">
+                                                        <div class="error-text"  *ngIf="userForm.get('shiftId')?.errors?.['required']">Shift is required.</div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                  <div class="row float-right">
+                                                    <div class="col">
+                                                      <button type="reset" class="btn btn-primary btn-sm m-3" data-dismiss="modal" (click)="hideAddForm()">Annuler</button>
+                                                      <button type="submit" class="btn btn-success btn-sm" data-dismiss="modal" [disabled]="userForm.invalid">Enregistrer</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                        </form>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                    <div style="margin: 2%; display: flex; align-items: center;">
+                        <h6 style="margin-right: 10px;">Role:</h6>
+                        <div>
+                            <select (change)="ChangeSortOrderbystate($event)">
+                                <option value="all">
+                                    All
+                                </option>
+                                <option *ngFor="let sortOrder of roles" [value]="sortOrder.id">
+                                    {{sortOrder.roleName}}
+                                </option>
+                            </select>
+                        </div>
+
+                      </div>
+
+
+
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Matricule</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Adresse</th>
+                                <th>Plansection</th>
+                                <th>Segment</th>
+                                <th>Role</th>
+                                <th>Permission</th>
+                                <th>CreatedAt</th>
+                                <th>UpdatedAt</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let f of users | filter: term : 'roleId' | slice:(currentPage - 1) * itemsPerPage : currentPage * itemsPerPage ">
+                                <td>
+                                    <p>{{f.matricule}}</p>
+                                </td>
+                                <td>
+                                    <p>{{f. nom}}</p>
+                                </td>
+                                <td>
+                                    <p>{{f.email}}</p>
+                                </td>
+                                <td>
+                                    <p>{{f.adresse}}</p>
+                                </td>
+                                <td>
+                                    <p>{{f.plansection}}</p>
+                                </td>
+                                <td>
+                                    <p>{{f.segment}}</p>
+                                </td>
+                                <td>
+                                    <p>{{f.role.roleName}}</p>
+                                </td>
+                                <td>
+                                    <p>{{f.permission.title}}</p>
+                                </td>
+                                <td>
+                                    <p>{{f.createdAt| date : "MM/dd/yyyy hh:mm:ssa" }}</p>
+                                </td>
+                                <td>
+                                    <p> {{f.updatedAt | date : "MM/dd/yyyy hh:mm:ssa" }}</p>
+                                </td>
+                                <td>
+
+                                    <button class="btn btn-sm btn-warning m-2" (click)="edituser(f)">
+                                        <i class="fas fa-pen text-white"></i>
+
+                                    </button>
+
+                                    <button class="btn btn-sm btn-danger m-2" (click)="deleteuser(f)">
+                                        <i class="fas fa-trash text-white"></i>
+                                    </button>
+                                </td>
+
+                        </tbody>
+                    </table>
+                    <div><button *ngIf="currentPage >1" class="previous-button"
+                            (click)="currentPage = currentPage - 1">Précédent</button>
+                        <button *ngIf="currentPage < total" class="next-button"
+                            (click)="currentPage = currentPage + 1">Suivant</button>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+    </div>
+</div>

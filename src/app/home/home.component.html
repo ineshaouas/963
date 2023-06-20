@@ -1,0 +1,53 @@
+
+<router-outlet></router-outlet>
+
+<section id="default" class="d-flex align-items-right">
+    <div class="container-fluid" data-aos="fade-up">
+      <div class="row">
+
+        <div class="col-xl-5 d-flex flex-column justify-content-end align-items-end">
+            <div style="width: 55%; margin-left: 10px" class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img"
+            data-aos="zoom-in" data-aos-delay="150">
+
+            <svg width="100%" viewBox="0 0 700 500" class="animated">
+                <clipPath id="clip-path">
+                    <path
+                        d="M89.479,0.180 L512.635,25.932 C568.395,29.326 603.115,76.927 590.357,129.078 L528.827,380.603 C518.688,422.048 472.661,448.814 427.190,443.300 L73.350,400.391 C32.374,395.422 -0.267,360.907 -0.002,322.064 L1.609,85.154 C1.938,36.786 40.481,-2.801 89.479,0.180 Z">
+                    </path>
+                </clipPath>
+                <!-- xlink:href for modern browsers, src for IE8- -->
+                <image clip-path="url(#clip-path)" xlink:href="assets/leoni.jpg" width="100%"
+                    height="465" class="svg__image"></image>
+            </svg>
+        
+            <button class="btn-get-started scrollto">  En savoir plus</button>
+        
+       
+        </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <form action="#">
+      <img src="assets/logo.png" style="  margin-left: 20%;" width="50%">
+      <div class="title align-baseline">Login </div>
+      <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+      <div class="alert alert-success" *ngIf='loginSuccess'>{{successMessage}}</div>
+      <div class="input-box underline">
+        <input type="text" placeholder="Enter Your Email" name="email" [(ngModel)]=" userauth.email" required>
+        <div class="underline"></div>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Enter Your Password" name="Mdp" [(ngModel)]=" userauth.Mdp"
+          required>
+        <div class="underline"></div>
+      </div>
+      <div class="input-box button">
+        <input type="submit" (click)="Login()" name="" value="Continue">
+      </div>
+    </form>
+  
+  </div>
+  

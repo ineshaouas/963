@@ -1,0 +1,137 @@
+<app-navbar></app-navbar>
+<section id="default" class="d-flex align-items-center">
+
+    <div class="container-fluid" data-aos="fade-up">
+        <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                <h1>
+                    Contact
+                </h1>
+                <ul>
+                    <li>
+                        <i class="bi bi-check-circle"></i> 
+                        Avez-vous une question à poser ou une remarque à formuler à Medical Innovation technology ?
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle"></i> 
+                        N'hésitez pas à remplir le formulaire suivant ou nous joindre par e-mail : med.innovation.technology@gmail.com.
+                    </li>
+                </ul>
+            </div>
+            <div style="width: 55%; margin-left: 10px"  class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="150">
+
+                <svg width="100%" viewBox="0 0 700 500" class="animated">
+                <clipPath id="clip-path">
+                    <path
+                        d="M89.479,0.180 L512.635,25.932 C568.395,29.326 603.115,76.927 590.357,129.078 L528.827,380.603 C518.688,422.048 472.661,448.814 427.190,443.300 L73.350,400.391 C32.374,395.422 -0.267,360.907 -0.002,322.064 L1.609,85.154 C1.938,36.786 40.481,-2.801 89.479,0.180 Z">
+                    </path>
+                </clipPath>
+                <!-- xlink:href for modern browsers, src for IE8- -->
+                <image clip-path="url(#clip-path)" xlink:href="assets/assets/contact.png" width="100%" height="465"
+                       class="svg__image"></image>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section id="contact" class="contact section-bg">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Nos contacter!</h2>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="info-box mb-4">
+                    <i class="bx bx-map"></i>
+                    <h3>Adresse</h3>
+                    <p>43 Av Environnement Cité El Omrane Monastir</p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="info-box  mb-4">
+                    <i class="bx bx-envelope"></i>
+                    <h3>Email</h3>
+                    <p>contact@example.com</p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="info-box  mb-4">
+                    <i class="bx bx-phone-call"></i>
+                    <h3>Téléphone</h3>
+                    <p>+216 99 999 999</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+
+
+            <div class="col-lg-12">
+                <form action="#" method="post" role="form" class="php-email-form">
+
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <input #email type="email" class="form-control" name="email" id="email" placeholder="Email" required >
+                           
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <input  type="text" name="prenom" class="form-control" id="name" placeholder="Prénom" required [(ngModel)]="candidat.prenom">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <input  type="text" name="nom" class="form-control" id="name" placeholder="Nom" required [(ngModel)]="candidat.nom">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="pays" class="form-control" id="name" placeholder="Pays" required  [(ngModel)]="candidat.pays" >
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <select    name="specialite" class="form-control" [(ngModel)]="candidat.specilite">
+                                    <option value="" selected="">-- Selectionner une spécialité --</option>
+                                    <option value="spec1">Spécialité 1</option>
+                                    <option value="spec2">Spécialité 2</option>
+                                    <option value="spec3">Spécialité 3</option>
+                                    <option value="spec4">Spécialité 4</option>
+                                    <option value="spec5">Spécialité 5</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="form-group mt-3">
+                        <textarea  class="form-control" name="message" rows="5" placeholder="Message" required [(ngModel)]="candidat.remarque"></textarea>
+                    </div>
+                    <div class="my-3">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">Votre message à été bien envoyé. Merci!</div>
+                    </div>
+                    <div class="text-center"><button 
+                        
+                        (click) = "addcondidat()" 
+                        type="submit">Envoyer</button></div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</section>

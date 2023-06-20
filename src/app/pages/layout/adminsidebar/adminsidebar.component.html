@@ -1,0 +1,122 @@
+<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+    <div class="sb-sidenav-menu">
+        <div class="nav" >
+            <div class="sb-sidenav-menu-heading"></div>
+  
+            <a class="nav-link" routerLink="/profile">
+                <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>
+                Profile
+            </a>
+            <a class="nav-link" routerLink="/stat">
+                <div class="sb-nav-link-icon"><i class="fas fa-chart-pie"></i></div>
+                Statistiques
+            </a>
+           <div *ngIf="role=='admin'" >
+            <a  class="nav-link" [routerLink]="['/admin/users']">
+                <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
+            Users
+            </a>
+            <a  class="nav-link" [routerLink]="['/admin/permissions']">
+                <div class="sb-nav-link-icon"><i class="fas fa-lock"></i></div>
+            Permission
+            </a>
+           
+            <a class="nav-link" [routerLink]="['/admin/roles']">
+                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+               Roles
+            </a>
+        </div>
+        <div *ngIf="role=='responsabletransport'" >
+            <a class="nav-link" [routerLink]="['/map']">
+                <div class="sb-nav-link-icon"><i class="fas fa-map"></i></div>
+               Map
+            </a>
+            <a class="nav-link" [routerLink]="['/restrans/agance']">
+                <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+               Agences
+            </a>
+        
+            <a class="nav-link" [routerLink]="['/restrans/circuit']">
+                <div class="sb-nav-link-icon"><i class="fas fa-route"></i></div>
+               Circuits
+            </a>
+            <a class="nav-link" [routerLink]="['/restrans/stations']">
+                <div class="sb-nav-link-icon"><i class="fas fa-bus"></i></div>
+               Stations
+            </a>
+            <a class="nav-link" [routerLink]="['/restrans/facturation']">
+                <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
+               Facturations
+            </a>
+            <a class="nav-link" [routerLink]="['/restrans/planifiagence']">
+                <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
+               Planifiagens
+            </a>
+            <a class="nav-link" [routerLink]="['/restrans/vehicule']">
+                <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
+               Vehicules
+            </a>
+            <a class="nav-link" [routerLink]="['/restrans/shift']">
+                <div class="sb-nav-link-icon"><i class="bi bi-clock-history"></i></div>
+              Shift
+            </a>
+            <a class="nav-link" [routerLink]="['/restrans/cotisation']">
+                <div class="sb-nav-link-icon"><i class="bi bi-wallet2"></i></div>
+                Cotisation
+            </a>
+            <a class="nav-link" [routerLink]="['/restrans/planification']">
+                <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
+                Planifications
+            </a>
+        </div>
+
+
+
+        <div *ngIf="role=='Key-user'" >
+            <a class="nav-link" [routerLink]="['/map']">
+                <div class="sb-nav-link-icon"><i class="fas fa-map"></i></div>
+               Map
+            </a>
+           
+        
+            <a class="nav-link" [routerLink]="['/userkey/circuit']">
+                <div class="sb-nav-link-icon"><i class="fas fa-route"></i></div>
+               Circuits
+            </a>
+            <a class="nav-link" [routerLink]="['/userkey/stations']">
+                <div class="sb-nav-link-icon"><i class="fas fa-bus"></i></div>
+               Stations
+            </a>
+           
+            <a class="nav-link" [routerLink]="['/userkey/shift']">
+                <div class="sb-nav-link-icon"><i class="bi bi-clock-history"></i></div>
+              Shift
+            </a>
+           
+           
+        </div>
+
+        <div *ngIf="role=='Servicepaie'" >
+            <a class="nav-link" [routerLink]="['/Servicepaie/cotisation']">
+                <div class="sb-nav-link-icon"><i class="bi bi-wallet2"></i></div>
+                Cotisation
+            </a>
+           
+           
+        </div>
+        <div *ngIf="role=='Psmanger'" >
+            <a class="nav-link" [routerLink]="['/Psmanger/planification']">
+                <div class="sb-nav-link-icon"><i class=""></i></div>
+                Planifications
+            </a>
+           
+            <a class="nav-link" [routerLink]="['/Psmanger/planifiagenceag']">
+                <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
+               Planifiagens
+            </a>
+        </div>
+        </div>
+        <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/><br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>   <br/>
+    </div>
+   
+  </nav>

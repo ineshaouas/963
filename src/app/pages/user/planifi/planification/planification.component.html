@@ -1,0 +1,205 @@
+<app-adminheader></app-adminheader>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <app-adminsidebar></app-adminsidebar>
+    </div>
+     <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="entre-4">Planification</h1>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col col-lg-10">
+                                <i class="fas fa-table me-1"></i>
+                                Liste des Planifications
+                            </div>
+                            <div class="col col-lg-2">
+                                <button class="btn btn-primary btn-sm float-right"  (click)="showAddForm()" >
+                                    <i class="fas fa-plus"></i>
+                                    
+                                    
+                                </button>
+                            </div>
+
+
+                            <div class="row" *ngIf="addFormVisible">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        
+                                    </div>
+                                    <div class="card-body">
+            
+                                        <form (ngSubmit)="createPlanification();"  [formGroup]="plaForm">
+                                            <div class="card card-default">
+            
+                                                <div class="card-body">
+            
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Name</label>
+                                                            <input type="text" formControlName="planificationName" class="form-control" />
+                                                    <div class="error-message" *ngIf="plaForm.get('planificationName')?.invalid && (plaForm.get('planificationName')?.dirty || plaForm.get('planificationName')?.touched)">
+                                                      <div class="error-text" *ngIf="plaForm.get('planificationName')?.errors?.['required']">Name is required.</div>
+                                                    </div>
+                                                    </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Temps d'entrer</label>
+                                                            <input type="datetime-local" formControlName="entre" class="form-control" />
+                                                            <div class="error-message" *ngIf="plaForm.get('entre')?.invalid && (plaForm.get('entre')?.dirty || plaForm.get('entre')?.touched)">
+                                                              <div class="error-text" *ngIf="plaForm.get('entre')?.errors?.['required']">Temps is required.</div>
+                                                            </div>
+                                                              
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Temps de sortie</label>
+                                                            <input type="datetime-local" formControlName="sortie" class="form-control" />
+                                                            <div class="error-message" *ngIf="plaForm.get('sortie')?.invalid && (plaForm.get('sortie')?.dirty || plaForm.get('sortie')?.touched)">
+                                                              <div class="error-text" *ngIf="plaForm.get('sortie')?.errors?.['required']">sortie is required.</div>
+                                                            </div>
+                                                              </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label>Temps de repos</label>
+                                                            <input type="datetime-local" formControlName="repos" class="form-control" />
+                                                            <div class="error-message" *ngIf="plaForm.get('repos')?.invalid && (plaForm.get('repos')?.dirty || plaForm.get('repos')?.touched)">
+                                                              <div class="error-text" *ngIf="plaForm.get('repos')?.errors?.['required']">repos is required.</div>
+                                                            </div>
+                                                              </div>
+                                                    </div>
+                                               
+                                                   
+                                                       
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="row float-right">
+                                                        <div class="col">
+                                                            <button type="reset" class="btn btn-primary  btn-sm m-3"
+                                                                data-dismiss="modal"
+                                                                (click)="hideAddForm()">Annuler</button>
+                                                            <button type="submit" class="btn btn-success btn-sm"
+                                                                data-dismiss="modal">Enregistrer</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+            
+            
+            
+            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="editFormVisible">
+                            <div class="card mb-4">
+                                <div class="card-body">
+        
+                                    
+                                        <form  [formGroup]="plaForm" (ngSubmit)="updatePlanification(planification)">
+                                        <div class="card card-default">
+        
+                                            <div class="card-body">
+        
+                                                <div class="row">
+                                                    <div class="form-group col-lg-6">
+                                                        <label>Name</label>
+                                                        <input type="text" formControlName="planificationName" class="form-control" />
+                                                <div class="error-message" *ngIf="plaForm.get('planificationName')?.invalid && (plaForm.get('planificationName')?.dirty || plaForm.get('planificationName')?.touched)">
+                                                  <div class="error-text" *ngIf="plaForm.get('planificationName')?.errors?.['required']">Name is required.</div>
+                                                </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                        <label>Temps d'entrer</label>
+                                                        <input type="datetime-local" formControlName="entre" class="form-control" />
+                                                        <div class="error-message" *ngIf="plaForm.get('entre')?.invalid && (plaForm.get('entre')?.dirty || plaForm.get('entre')?.touched)">
+                                                          <div class="error-text" *ngIf="plaForm.get('entre')?.errors?.['required']">Temps is required.</div>
+                                                        </div>
+                                                        </div>
+                                                    <div class="form-group col-lg-6">
+                                                        <label>Temps de sortie</label>
+                                                        <input type="datetime-local" formControlName="sortie" class="form-control" />
+                                                        <div class="error-message" *ngIf="plaForm.get('sortie')?.invalid && (plaForm.get('sortie')?.dirty || plaForm.get('sortie')?.touched)">
+                                                          <div class="error-text" *ngIf="plaForm.get('sortie')?.errors?.['required']">sortie is required.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                        <label>Temps de repos</label>
+                                                        <input type="datetime-local" formControlName="repos" class="form-control" />
+                                                        <div class="error-message" *ngIf="plaForm.get('repos')?.invalid && (plaForm.get('repos')?.dirty || plaForm.get('repos')?.touched)">
+                                                          <div class="error-text" *ngIf="plaForm.get('repos')?.errors?.['required']">repos is required.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="row float-right">
+                                                    <div class="col">
+                                                        <button type="reset" class="btn btn-primary  btn-sm m-3"
+                                                            data-dismiss="modal"
+                                                            (click)="hideEditForm()">Annuler</button>
+                                                        <button type="submit" class="btn btn-success btn-sm"
+                                                            data-dismiss="modal">Enregistrer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+        
+        
+        
+        
+                                </div>
+                            </div>
+                        </div>
+        
+
+
+
+
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Nom</th>
+<th>Temps d'entrer</th>
+<th>Temps de sortie</th>
+<th>Temps de sortie</th>
+
+<th>createdAt</th>
+<th>updatedAt</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody> 
+<tr *ngFor="let role of Planifications | slice:(currentPage - 1) * itemsPerPage : currentPage * itemsPerPage "   >
+<td> <p>{{role.planificationName}}</p></td>
+<td> <p>{{role.entre}}</p></td> 
+<td> <p>{{role.sortie}}</p></td> 
+<td> <p>{{role.repos}}</p></td> 
+<td> <p>{{role.createdAt| date : "MM/dd/yyyy hh:mm:ssa" }}</p></td>
+<td> <p> {{ role.updatedAt | date : "MM/dd/yyyy hh:mm:ssa" }}</p></td>
+<td><button class="btn btn-sm btn-warning m-2"  (click)="editPlanification(role)">
+<i class="fas fa-pen text-white"></i>
+
+</button>
+
+<button class="btn btn-sm btn-danger m-2" (click)="deletePlanification(role)">
+<i class="fas fa-trash text-white"></i>
+
+</button>
+</td>
+
+</tbody>
+</table>
+<div><button  *ngIf="currentPage>1" class="previous-button" (click)="currentPage = currentPage - 1">Précédent</button>
+    <button *ngIf="currentPage<total"  class="next-button" (click)="currentPage = currentPage + 1">Suivant</button></div>
+
+                </div>
+            </div>
+        </main>
+        
+    </div>
+</div>
